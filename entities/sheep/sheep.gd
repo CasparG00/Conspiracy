@@ -1,44 +1,59 @@
+class_name Sheep
 extends CharacterBody2D
 
 
-const MAX_VELOCITY := 50
+const SPEED := 50
+const WANDER_RADIUS = 2048
 
-@onready var detection_area: Area2D = $DetectionArea
+var target_position := Vector2.INF
 
-var influence_areas: Array[Area2D] = []
+var current_area: PerceptionArea2D
+
+
+func _ready():
+	target_position = global_position
 
 
 func _physics_process(_delta: float):
 	var wish_velocity := Vector2.ZERO
 
-	if not influence_areas.is_empty():
-		var closest_area: Area2D = influence_areas.front()
-		var direction_delta := closest_area.global_position - global_position
-		wish_velocity += direction_delta.normalized() * (direction_delta.length() - closest_area.get_radius() * 0.5)
+	var target_area: PerceptionArea2D
+
+	if not current_area:
+		target_area = find_new_target()
+	else:
+		if current_area.dissociation_active:
+			current_area = null
+			target_area = find_new_target()
+
+	if target_area:
+		target_position = target_area.global_position
+	elif current_area:
+		target_position = current_area.global_position
+	else:
+		target_position = global_position
 	
-	# Clamp the wish_velocity to the max velocity.
-	if wish_velocity.length_squared() > MAX_VELOCITY * MAX_VELOCITY:
-		wish_velocity = wish_velocity.normalized() * MAX_VELOCITY
+	wish_velocity += global_position.direction_to(target_position) * SPEED
 
 	velocity = wish_velocity
 	move_and_slide()
 
 
-func _on_detection_area_area_entered(area: Area2D):
-	influence_areas.append(area)
-	influence_areas.sort_custom(_sort_by_weight)
+func find_new_target() -> PerceptionArea2D:
+	# find the area that has the most followers.
+	var target_area: PerceptionArea2D
+	for area: PerceptionArea2D in GameManager.perception_areas:
+		if not target_area:
+			target_area = area
 
+		if area.dissociation_active:
+			continue
+		
+		if area.denial_active:
+			return area
 
-func _on_detection_area_area_exited(area: Area2D):
-	influence_areas.erase(area)
-	influence_areas.sort_custom(_sort_by_weight)
+		# Choose the area with the most followers.
+		if area.followers.size() > target_area.followers.size():
+			target_area = area
 
-
-func _sort_by_weight(area1: Area2D, area2: Area2D) -> bool:
-	var distance1 := global_position.distance_to(area1.global_position)
-	var distance2 := global_position.distance_to(area2.global_position)
-
-	var weight1: float = area1.get_radius() / distance1
-	var weight2: float = area2.get_radius() / distance2
-
-	return weight1 > weight2
+	return target_area

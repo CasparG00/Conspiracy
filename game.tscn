@@ -1,20 +1,66 @@
-[gd_scene load_steps=3 format=3 uid="uid://ded82q4autgh2"]
+[gd_scene load_steps=5 format=3 uid="uid://ded82q4autgh2"]
 
 [ext_resource type="PackedScene" uid="uid://bsfnsfhxorpx1" path="res://entities/sheep/sheep.tscn" id="1_avbu6"]
 [ext_resource type="PackedScene" uid="uid://dlxcuiyesufci" path="res://entities/influence_area/influence_area.tscn" id="2_66oey"]
+[ext_resource type="PackedScene" uid="uid://bvjt4yq6o2b0p" path="res://entities/influence_area/player_area.tscn" id="3_syti3"]
+[ext_resource type="Script" path="res://entities/sheep_spawner/sheep_spawner.gd" id="3_uu0mr"]
 
 [node name="Game" type="Node"]
 
 [node name="World" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="World"]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+
+[node name="SheepSpawner" type="Node" parent="World"]
+script = ExtResource("3_uu0mr")
+sheep_scene = ExtResource("1_avbu6")
+
+[node name="ActionSpawner" type="Node" parent="World"]
+
+[node name="PlayerArea" parent="World" instance=ExtResource("3_syti3")]
+radius = null
 
 [node name="InfluenceArea" parent="World" instance=ExtResource("2_66oey")]
-position = Vector2(0, 200)
-radius = 32
+position = Vector2(1024, 0)
+radius = 512.0
 
-[node name="InfluenceArea2" parent="World" instance=ExtResource("2_66oey")]
-position = Vector2(464, -205)
-radius = 100
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Sheep" parent="World" instance=ExtResource("1_avbu6")]
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ActionBar" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -136.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Denial" type="Button" parent="CanvasLayer/Control/ActionBar"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Denial"
+icon_alignment = 1
+
+[node name="ActingOut" type="Button" parent="CanvasLayer/Control/ActionBar"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Acting Out"
+icon_alignment = 1
+
+[node name="Dissociate" type="Button" parent="CanvasLayer/Control/ActionBar"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Dissociation"

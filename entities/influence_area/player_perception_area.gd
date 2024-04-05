@@ -1,0 +1,1 @@
+extends PerceptionArea2D

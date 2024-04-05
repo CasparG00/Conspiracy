@@ -1,23 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlxcuiyesufci"]
+[gd_scene load_steps=5 format=3 uid="uid://bvjt4yq6o2b0p"]
 
-[ext_resource type="Script" path="res://entities/influence_area/influence_area.gd" id="1_idk7u"]
-[ext_resource type="Script" path="res://addons/texture_circle/TextureCircle.gd" id="2_bjau5"]
+[ext_resource type="Script" path="res://entities/influence_area/player_perception_area.gd" id="1_228ih"]
+[ext_resource type="Script" path="res://addons/texture_circle/TextureCircle.gd" id="2_uxf4r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7d14x"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_64me7"]
 size = Vector2(16, 16)
 
-[node name="InfluenceArea" type="Area2D"]
-script = ExtResource("1_idk7u")
-radius = null
+[node name="PlayerArea" type="Area2D"]
+script = ExtResource("1_228ih")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7d14x")
 
 [node name="TextureCircle" type="Node2D" parent="."]
 texture_repeat = 2
-script = ExtResource("2_bjau5")
+script = ExtResource("2_uxf4r")
 texture_outline = SubResource("PlaceholderTexture2D_64me7")
 
 [node name="Label" type="Label" parent="."]
