@@ -1,1 +1,2 @@
+class_name PlayerPerceptionArea2D
 extends PerceptionArea2D
