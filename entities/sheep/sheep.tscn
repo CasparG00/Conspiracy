@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsfnsfhxorpx1"]
+
+[ext_resource type="Texture2D" uid="uid://c87whnnkh2s8h" path="res://icon.svg" id="1_5omwb"]
+[ext_resource type="Script" path="res://entities/sheep/sheep.gd" id="1_s1s5f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qekc0"]
+radius = 16.0
+height = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ljsq"]
+radius = 500.0
+
+[node name="Sheep" type="CharacterBody2D"]
+script = ExtResource("1_s1s5f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qekc0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.25)
+texture = ExtResource("1_5omwb")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_7ljsq")

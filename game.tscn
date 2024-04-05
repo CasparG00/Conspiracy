@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ded82q4autgh2"]
+
+[ext_resource type="PackedScene" uid="uid://bsfnsfhxorpx1" path="res://entities/sheep/sheep.tscn" id="1_avbu6"]
+[ext_resource type="PackedScene" uid="uid://dlxcuiyesufci" path="res://entities/influence_area/influence_area.tscn" id="2_66oey"]
+
+[node name="Game" type="Node"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="World"]
+
+[node name="Sheep" parent="World" instance=ExtResource("1_avbu6")]
+
+[node name="InfluenceArea" parent="." instance=ExtResource("2_66oey")]
+position = Vector2(404, 0)
