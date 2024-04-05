@@ -11,6 +11,7 @@ height = 64.0
 radius = 500.0
 
 [node name="Sheep" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_s1s5f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -26,3 +27,6 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_7ljsq")
+
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]

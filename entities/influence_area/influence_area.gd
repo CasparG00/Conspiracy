@@ -1,18 +1,15 @@
 extends Area2D
 
 
-const BASE_RADIUS = 256
-
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var texture_circle: TextureCircle = $TextureCircle
+@export var radius := 256.0: set = set_radius
 
 
-func _ready():
-	set_radius(BASE_RADIUS)
+func set_radius(value: float):
+	$CollisionShape2D.shape = CircleShape2D.new()
+	$CollisionShape2D.shape.radius = value
+
+	$TextureCircle.radius = value
 
 
-func set_radius(radius: float):
-	collision_shape.shape = CircleShape2D.new()
-	collision_shape.shape.radius = radius
-
-	texture_circle.radius = radius
+func get_radius() -> float:
+	return $TextureCircle.radius

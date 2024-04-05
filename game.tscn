@@ -9,7 +9,12 @@
 
 [node name="Camera2D" type="Camera2D" parent="World"]
 
-[node name="Sheep" parent="World" instance=ExtResource("1_avbu6")]
+[node name="InfluenceArea" parent="World" instance=ExtResource("2_66oey")]
+position = Vector2(0, 200)
+radius = 32
 
-[node name="InfluenceArea" parent="." instance=ExtResource("2_66oey")]
-position = Vector2(404, 0)
+[node name="InfluenceArea2" parent="World" instance=ExtResource("2_66oey")]
+position = Vector2(464, -205)
+radius = 100
+
+[node name="Sheep" parent="World" instance=ExtResource("1_avbu6")]
