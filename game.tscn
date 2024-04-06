@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ded82q4autgh2"]
+[gd_scene load_steps=4 format=3 uid="uid://ded82q4autgh2"]
 
-[ext_resource type="PackedScene" uid="uid://bsfnsfhxorpx1" path="res://entities/sheep/sheep.tscn" id="1_avbu6"]
+[ext_resource type="PackedScene" uid="uid://jadm4m8506o0" path="res://entities/action_selector/action_selector.tscn" id="2_6j171"]
 [ext_resource type="PackedScene" uid="uid://dlxcuiyesufci" path="res://entities/influence_area/influence_area.tscn" id="2_66oey"]
-[ext_resource type="PackedScene" uid="uid://bvjt4yq6o2b0p" path="res://entities/influence_area/player_area.tscn" id="3_syti3"]
-[ext_resource type="Script" path="res://entities/sheep_spawner/sheep_spawner.gd" id="3_uu0mr"]
+[ext_resource type="ButtonGroup" uid="uid://y4it6l3u2v3o" path="res://action_bar_button_group.tres" id="2_vjk3e"]
 
 [node name="Game" type="Node"]
 
@@ -13,17 +12,10 @@
 zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 
-[node name="SheepSpawner" type="Node" parent="World"]
-script = ExtResource("3_uu0mr")
-sheep_scene = ExtResource("1_avbu6")
+[node name="PlayerArea" parent="World" instance=ExtResource("2_66oey")]
 
-[node name="ActionSpawner" type="Node" parent="World"]
-
-[node name="PlayerArea" parent="World" instance=ExtResource("3_syti3")]
-radius = null
-
-[node name="InfluenceArea" parent="World" instance=ExtResource("2_66oey")]
-position = Vector2(1024, 0)
+[node name="OpponentArea" parent="World" instance=ExtResource("2_66oey")]
+position = Vector2(1152, 0)
 radius = 512.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -51,16 +43,26 @@ alignment = 1
 [node name="Denial" type="Button" parent="CanvasLayer/Control/ActionBar"]
 layout_mode = 2
 size_flags_vertical = 4
+toggle_mode = true
+button_group = ExtResource("2_vjk3e")
 text = "Denial"
 icon_alignment = 1
 
 [node name="ActingOut" type="Button" parent="CanvasLayer/Control/ActionBar"]
 layout_mode = 2
 size_flags_vertical = 4
+toggle_mode = true
+button_group = ExtResource("2_vjk3e")
 text = "Acting Out"
 icon_alignment = 1
 
 [node name="Dissociate" type="Button" parent="CanvasLayer/Control/ActionBar"]
 layout_mode = 2
 size_flags_vertical = 4
+toggle_mode = true
+button_group = ExtResource("2_vjk3e")
 text = "Dissociation"
+
+[node name="ActionSelector" parent="." node_paths=PackedStringArray("player_area") instance=ExtResource("2_6j171")]
+button_group = ExtResource("2_vjk3e")
+player_area = NodePath("../World/PlayerArea")
