@@ -9,6 +9,7 @@ height = 64.0
 
 [node name="Sheep" type="CharacterBody2D" groups=["sheep"]]
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_iheav")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

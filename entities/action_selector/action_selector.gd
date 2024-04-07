@@ -18,8 +18,15 @@ func _process(_delta):
 		match pressed_button.get_name():
 			"Denial":
 				for entry: Node in sheep:
+					if entry.home_area:
+						return
+					
 					entry.set_target(player_area)
 			"ActingOut":
 				print("Making them Act out!")
 			"Dissociate":
-				print("Casting Dissociation!")
+				for entry: Node in sheep:
+					if not entry.home_area:
+						return
+					
+					entry.set_target(player_area)

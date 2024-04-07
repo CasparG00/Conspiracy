@@ -13,6 +13,7 @@ zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 
 [node name="PlayerArea" parent="World" instance=ExtResource("2_66oey")]
+is_player = true
 
 [node name="OpponentArea" parent="World" instance=ExtResource("2_66oey")]
 position = Vector2(1152, 0)
@@ -62,6 +63,20 @@ size_flags_vertical = 4
 toggle_mode = true
 button_group = ExtResource("2_vjk3e")
 text = "Dissociation"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+text = "Tutorial text"
+scroll_active = false
+drag_and_drop_selection_enabled = false
 
 [node name="ActionSelector" parent="." node_paths=PackedStringArray("player_area") instance=ExtResource("2_6j171")]
 button_group = ExtResource("2_vjk3e")

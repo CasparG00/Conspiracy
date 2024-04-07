@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bsfnsfhxorpx1" path="res://entities/sheep/sheep.tscn" id="4_pqcb8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7d14x"]
+radius = 1.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_64me7"]
 size = Vector2(16, 16)
