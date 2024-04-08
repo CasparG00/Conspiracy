@@ -1,23 +1,86 @@
-[gd_scene load_steps=4 format=3 uid="uid://ded82q4autgh2"]
+[gd_scene load_steps=20 format=3 uid="uid://ded82q4autgh2"]
 
 [ext_resource type="PackedScene" uid="uid://jadm4m8506o0" path="res://entities/action_selector/action_selector.tscn" id="2_6j171"]
 [ext_resource type="PackedScene" uid="uid://dlxcuiyesufci" path="res://entities/influence_area/influence_area.tscn" id="2_66oey"]
-[ext_resource type="ButtonGroup" uid="uid://y4it6l3u2v3o" path="res://action_bar_button_group.tres" id="2_vjk3e"]
+[ext_resource type="Texture2D" uid="uid://bhy36rh1xujql" path="res://entities/level/sprite_grass1.png" id="2_clfq6"]
+[ext_resource type="ButtonGroup" uid="uid://y4it6l3u2v3o" path="res://entities/action_selector/action_bar_button_group.tres" id="2_vjk3e"]
+[ext_resource type="Texture2D" uid="uid://da4sws686tj86" path="res://entities/level/sprite_grass2.png" id="3_gvmae"]
+[ext_resource type="Texture2D" uid="uid://b6xovwid7m8k3" path="res://entities/level/sprite_flower_sheet.png" id="4_fyavy"]
+[ext_resource type="Script" path="res://prewarm_static_particles.gd" id="5_6awex"]
+[ext_resource type="Texture2D" uid="uid://dihspo1rdnnes" path="res://entities/action_selector/sprite_button.png" id="7_1mh3g"]
+[ext_resource type="Texture2D" uid="uid://7mcfqb7bkwi5" path="res://entities/action_selector/sprite_button_pressed.png" id="8_gijnf"]
+[ext_resource type="Texture2D" uid="uid://bc5wiyqp3n286" path="res://entities/action_selector/sprite_denial.png" id="8_qdwwr"]
+[ext_resource type="Texture2D" uid="uid://rsk7yijbjf52" path="res://entities/action_selector/sprite_button_focus.png" id="9_s8hju"]
+[ext_resource type="Texture2D" uid="uid://buvlvupfqpcuv" path="res://entities/action_selector/sprite_button_hover.png" id="9_vug5h"]
+[ext_resource type="Texture2D" uid="uid://dfmlwdkw6abk7" path="res://entities/action_selector/sprite_acting_out.png" id="11_e5ilq"]
+[ext_resource type="Texture2D" uid="uid://bn151hu5isubw" path="res://entities/action_selector/sprite_dissociation.png" id="12_v2y84"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c6bkw"]
+texture = ExtResource("2_clfq6")
+texture_region_size = Vector2i(512, 512)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c17mn"]
+texture = ExtResource("3_gvmae")
+texture_region_size = Vector2i(512, 512)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_qs3wl"]
+tile_size = Vector2i(512, 512)
+sources/5 = SubResource("TileSetAtlasSource_c6bkw")
+sources/6 = SubResource("TileSetAtlasSource_c17mn")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5j3t7"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dupmo"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2048, 2048, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 0.1
+scale_max = 0.1
+anim_offset_min = 0.01
+anim_offset_max = 1.0
 
 [node name="Game" type="Node"]
 
 [node name="World" type="Node2D" parent="."]
+z_as_relative = false
+y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="World"]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.75, 0.75)
 position_smoothing_enabled = true
 
 [node name="PlayerArea" parent="World" instance=ExtResource("2_66oey")]
 is_player = true
 
 [node name="OpponentArea" parent="World" instance=ExtResource("2_66oey")]
-position = Vector2(1152, 0)
+position = Vector2(703, -399)
 radius = 512.0
+
+[node name="TileMap" type="TileMap" parent="World"]
+z_index = -100
+tile_set = SubResource("TileSet_qs3wl")
+format = 2
+layer_0/tile_data = PackedInt32Array(-131078, 5, 0, -65542, 5, 0, -6, 5, 0, 65530, 5, 0, 131066, 5, 0, 196602, 5, 0, 262138, 5, 0, 327674, 5, 0, -131077, 5, 0, -65541, 5, 0, -5, 5, 0, 65531, 5, 0, 131067, 5, 0, 196603, 5, 0, 262139, 5, 0, 327675, 5, 0, -131076, 5, 0, -65540, 5, 0, -4, 5, 0, 65532, 5, 0, 131068, 5, 0, 196604, 5, 0, 262140, 5, 0, 327676, 5, 0, -131075, 5, 0, -65539, 5, 0, -3, 5, 0, 65533, 5, 0, 131069, 5, 0, 196605, 5, 0, 262141, 5, 0, 327677, 5, 0, -131074, 5, 0, -65538, 5, 0, -2, 5, 0, 65534, 5, 0, 131070, 5, 0, 196606, 5, 0, 262142, 5, 0, 327678, 5, 0, -131073, 5, 0, -65537, 5, 0, -1, 5, 0, 65535, 5, 0, 131071, 5, 0, 196607, 5, 0, 262143, 5, 0, 327679, 5, 0, -196608, 5, 0, -131072, 5, 0, -65536, 5, 0, 0, 5, 0, 65536, 5, 0, 131072, 5, 0, 196608, 5, 0, 262144, 5, 0, -196607, 5, 0, -131071, 5, 0, -65535, 5, 0, 1, 5, 0, 65537, 5, 0, 131073, 5, 0, 196609, 5, 0, 262145, 5, 0, -196606, 5, 0, -131070, 5, 0, -65534, 5, 0, 2, 5, 0, 65538, 5, 0, 131074, 5, 0, 196610, 5, 0, 262146, 5, 0, -196605, 5, 0, -131069, 5, 0, -65533, 5, 0, 3, 5, 0, 65539, 5, 0, 131075, 5, 0, 196611, 5, 0, 262147, 5, 0, -196604, 5, 0, -131068, 5, 0, -65532, 5, 0, 4, 5, 0, 65540, 5, 0, 131076, 5, 0, 196612, 5, 0, 262148, 5, 0, -196603, 5, 0, -131067, 5, 0, -65531, 5, 0, 5, 5, 0, 65541, 5, 0, 131077, 5, 0, 196613, 5, 0, 262149, 5, 0, -196602, 5, 0, -131066, 5, 0, -65530, 5, 0, 6, 5, 0, 65542, 5, 0, 131078, 5, 0, 196614, 5, 0, 262150, 5, 0)
+
+[node name="FlowerGPUParticles2D" type="GPUParticles2D" parent="World"]
+z_index = -99
+material = SubResource("CanvasItemMaterial_5j3t7")
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_dupmo")
+texture = ExtResource("4_fyavy")
+preprocess = 1.0
+speed_scale = 0.0
+explosiveness = 1.0
+randomness = 1.0
+interpolate = false
+script = ExtResource("5_6awex")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -28,41 +91,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ActionBar" type="HBoxContainer" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -136.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Denial" type="Button" parent="CanvasLayer/Control/ActionBar"]
-layout_mode = 2
-size_flags_vertical = 4
-toggle_mode = true
-button_group = ExtResource("2_vjk3e")
-text = "Denial"
-icon_alignment = 1
-
-[node name="ActingOut" type="Button" parent="CanvasLayer/Control/ActionBar"]
-layout_mode = 2
-size_flags_vertical = 4
-toggle_mode = true
-button_group = ExtResource("2_vjk3e")
-text = "Acting Out"
-icon_alignment = 1
-
-[node name="Dissociate" type="Button" parent="CanvasLayer/Control/ActionBar"]
-layout_mode = 2
-size_flags_vertical = 4
-toggle_mode = true
-button_group = ExtResource("2_vjk3e")
-text = "Dissociation"
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -77,6 +105,124 @@ layout_mode = 2
 text = "Tutorial text"
 scroll_active = false
 drag_and_drop_selection_enabled = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.7
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 83.592
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 32
+
+[node name="ActionBar" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Denial" type="TextureButton" parent="CanvasLayer/Control/MarginContainer2/ActionBar"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_vjk3e")
+texture_normal = ExtResource("7_1mh3g")
+texture_pressed = ExtResource("8_gijnf")
+texture_hover = ExtResource("9_vug5h")
+texture_focused = ExtResource("9_s8hju")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/MarginContainer2/ActionBar/Denial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_qdwwr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer2/ActionBar/Denial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Denial"
+horizontal_alignment = 1
+
+[node name="ActingOut" type="TextureButton" parent="CanvasLayer/Control/MarginContainer2/ActionBar"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_vjk3e")
+texture_normal = ExtResource("7_1mh3g")
+texture_pressed = ExtResource("8_gijnf")
+texture_hover = ExtResource("9_vug5h")
+texture_focused = ExtResource("9_s8hju")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/MarginContainer2/ActionBar/ActingOut"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_e5ilq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer2/ActionBar/ActingOut"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Act Out"
+horizontal_alignment = 1
+
+[node name="Dissociate" type="TextureButton" parent="CanvasLayer/Control/MarginContainer2/ActionBar"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_vjk3e")
+texture_normal = ExtResource("7_1mh3g")
+texture_pressed = ExtResource("8_gijnf")
+texture_hover = ExtResource("9_vug5h")
+texture_focused = ExtResource("9_s8hju")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/MarginContainer2/ActionBar/Dissociate"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_v2y84")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/MarginContainer2/ActionBar/Dissociate"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Dissociate"
+horizontal_alignment = 1
 
 [node name="ActionSelector" parent="." node_paths=PackedStringArray("player_area") instance=ExtResource("2_6j171")]
 button_group = ExtResource("2_vjk3e")

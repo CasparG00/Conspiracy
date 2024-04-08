@@ -3,13 +3,11 @@
 [ext_resource type="Script" path="res://entities/influence_area/influence_area.gd" id="1_idk7u"]
 [ext_resource type="Script" path="res://addons/texture_circle/TextureCircle.gd" id="2_bjau5"]
 [ext_resource type="Script" path="res://entities/influence_area/sheep_spawner.gd" id="3_hcxrs"]
+[ext_resource type="Texture2D" uid="uid://dk1r0xl3u6n67" path="res://entities/influence_area/line.png" id="3_upk2w"]
 [ext_resource type="PackedScene" uid="uid://bsfnsfhxorpx1" path="res://entities/sheep/sheep.tscn" id="4_pqcb8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7d14x"]
 radius = 1.0
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_64me7"]
-size = Vector2(16, 16)
 
 [node name="InfluenceArea" type="Area2D"]
 script = ExtResource("1_idk7u")
@@ -19,8 +17,10 @@ shape = SubResource("CircleShape2D_7d14x")
 
 [node name="TextureCircle" type="Node2D" parent="."]
 texture_repeat = 2
+scale = Vector2(0.1, 0.1)
 script = ExtResource("2_bjau5")
-texture_outline = SubResource("PlaceholderTexture2D_64me7")
+texture_outline = ExtResource("3_upk2w")
+radius = 3154.51
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8

@@ -13,6 +13,7 @@ extends Area2D
 func _ready():
 	set_radius(radius)
 
+
 func _on_body_entered(body: Node2D):
 	if not body.is_in_group("sheep"):
 		return
@@ -32,8 +33,8 @@ func _on_body_exited(body: Node2D):
 
 func set_radius(value: float):
 	collision_shape.scale = Vector2.ONE * value
-	texture_circle.radius = value
+	texture_circle.radius = value * 10
 
 
 func get_radius() -> float:
-	return texture_circle.radius
+	return texture_circle.radius * 0.1

@@ -2,12 +2,10 @@
 
 [ext_resource type="Script" path="res://entities/action_selector/action_selector.gd" id="1_j8x50"]
 [ext_resource type="Script" path="res://addons/texture_circle/TextureCircle.gd" id="2_trg7i"]
+[ext_resource type="Texture2D" uid="uid://dk1r0xl3u6n67" path="res://entities/influence_area/line.png" id="3_pgna5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8sqy"]
 radius = 128.0
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_01n51"]
-size = Vector2(16, 16)
 
 [node name="ActionSelector" type="Area2D"]
 script = ExtResource("1_j8x50")
@@ -17,5 +15,7 @@ shape = SubResource("CircleShape2D_u8sqy")
 
 [node name="TextureCircle" type="Node2D" parent="."]
 texture_repeat = 2
+scale = Vector2(0.1, 0.1)
 script = ExtResource("2_trg7i")
-texture_outline = SubResource("PlaceholderTexture2D_01n51")
+texture_outline = ExtResource("3_pgna5")
+radius = 1536.0
