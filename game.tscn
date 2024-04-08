@@ -93,6 +93,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5

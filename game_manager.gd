@@ -1,6 +1,11 @@
 extends Node
 
 
+@export var sheep_scene: PackedScene
+
+var player_area: Area2D: set = set_player_area
+var opponent_area: Area2D: set = set_opponent_area
+
 var tutorial_events := [
 	"You are a conspiracy theory. \n
 	This is a sheep.",
@@ -15,3 +20,11 @@ var tutorial_events := [
 	
 	func(): print("spawn sheep"), # Make them go to  the other one
 ]
+
+
+func set_player_area(value: Area2D):
+	player_area = value
+
+
+func set_opponent_area(value: Area2D):
+	opponent_area = value
